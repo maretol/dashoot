@@ -1,0 +1,28 @@
+{
+  "name": "dashoot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/maretol/dashoot.git"
+  },
+  "keywords": [],
+  "author": "maretol",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maretol/dashoot/issues"
+  },
+  "homepage": "https://github.com/maretol/dashoot",
+  "dependencies": {
+    "gh-pages": "^1.1.0",
+    "gitbook-cli": "^2.3.2",
+    "gitbook-plugin-uml": "^1.0.0"
+  }
+}
