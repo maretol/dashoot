@@ -1,0 +1,22 @@
+@startuml "server-client map"
+Client -> APIServer : 見たいテーマのAPI要求
+APIServer -> ThemeServer : テーマの有無を確認。
+DataBase DB
+ThemeServer -> DB : テーマがあるか確認する
+ThemeServer -> ThemeServer : テーマがなければ作る
+ThemeServer -> APIServer : テーマAPIを返す
+APIServer -> Client : 返答
+Client -> ThemeServer : テーマサーバに接続
+ThemeServer -> Client : とりあえず直近の50件ぐらいを返す
+loop 適宜行う
+    group リアルタイム通信部分
+    else WebSocketによる通信の場合
+        Client <-> ThemeServer : WebSocketによるタイムラインのPushおよび書き込みのPull
+    else HTTP/2の場合
+        Client <- ThemeServer : HTTP/2によるタイムラインのPush
+        Client -> ThemeServer : APIによる書き込み
+    end
+    ThemeServer -> DB : 一定数書き込みが溜まったらDBへ
+end
+Client <-> ThemeServer : 終わったら切断
+@enduml
