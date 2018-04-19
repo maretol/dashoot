@@ -7,16 +7,7 @@ jobs:
     docker:
       # specify the version
       - image: circleci/golang:1.9
-      
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/postgres:9.4
 
-    #### TEMPLATE_NOTE: go expects specific checkout path representing url
-    #### expecting it in the form of
-    ####   /go/src/github.com/circleci/go-tool
-    ####   /go/src/bitbucket.org/circleci/go-tool
     working_directory: /go/src/github.com/maretol/dashoot
     steps:
       - checkout
@@ -24,3 +15,29 @@ jobs:
       # specify any bash command here prefixed with `run: `
       - run: go get -v -t -d ./...
       - run: go test -v ./...
+
+
+  document:
+    docker:
+      - image: circleci/node:6.2.2
+    
+    filters:
+      branches: master
+      tag:
+        only: /*wsd
+
+    steps:
+      # 以下WSDファイルの変換
+      - run: git config --global user.name &USERNAME
+      - run: git config --global user.email $EMAIL
+      - run: sudo apt install graphviz
+      - run: npm install
+      - run: npm run build
+      - |
+        cat <<EOF > ./_book/circle.yml
+        general:
+          branck:
+            ignore:
+              - gh-pages
+        EOF
+      - npm run publish
