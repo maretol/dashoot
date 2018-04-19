@@ -36,12 +36,3 @@ jobs:
               - gh-pages
         EOF
       - npm run publish
-
-workflows:
-  version: 2
-  create_document:
-    jobs:
-      - document:
-        filters:
-          branches:
-            only: master
