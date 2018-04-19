@@ -22,7 +22,8 @@ jobs:
       - image: circleci/node:6.2.2
     
     filters:
-      branches: master
+      branches:
+        only: master
 
     steps:
       # 以下WSDファイルの変換
