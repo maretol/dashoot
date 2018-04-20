@@ -1,0 +1,22 @@
+{
+  "name": "doc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "init": "gitbook init",
+    "start": "gitbook serve",
+    "bulid": "gitbook build",
+    "publish": "gh-pages -d _book -m 'Auto publish book'",
+    "deploy": "npm run build && npm run publish"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "gh-pages": "^1.1.0",
+    "gitbook-cli": "^2.3.2",
+    "gitbook-plugin-uml": "^1.0.0"
+  }
+}
