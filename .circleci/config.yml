@@ -23,20 +23,16 @@ jobs:
     steps:
       - checkout
       # 以下WSDファイルの変換
+      # plantuml.jar をwgetあたりで持ってくるようにするとかしたほうがいいかもしれない
       - run: java -jar ./plantuml.jar *.wsd
       - run: git checkout -b auto-document
       - run: git add ~/*
-      - run: git commit -am "auto commit"
+      - run: git commit -am "[ci skip]auto commit"
+      - run: git remote add origin ssh://github.com/maretol/dashoot.git
       - run: git push origin auto-document
 
 workflows:
   version: 2
   create_document:
-    triggers:
-      schedule:
-        filters:
-          branches:
-            ignore:
-              - auto-document
     jobs:
       - document
