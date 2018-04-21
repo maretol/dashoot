@@ -28,13 +28,6 @@ jobs:
       - run: sudo apt install graphviz
       - run: npm install
       - run: npm run build
-      - |
-        cat <<EOF > ./_book/circle.yml
-        general:
-          branck:
-            ignore:
-              - gh-pages
-        EOF
       - run: npm run publish
 
 workflows:
