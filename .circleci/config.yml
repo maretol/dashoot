@@ -21,7 +21,7 @@ jobs:
       - image: circleci/node:9.11.1
     steps:
       # 以下WSDファイルの変換
-      - run: git config --global user.name &USERNAME
+      - run: git config --global user.name $USERNAME
       - run: git config --global user.email $EMAIL
       - run: sudo apt install graphviz
       - run: npm install
