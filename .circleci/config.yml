@@ -36,7 +36,7 @@ workflows:
       schedule:
         filters:
           branches:
-            only:
-              - document
+            ignore:
+              - auto-document
     jobs:
       - document
