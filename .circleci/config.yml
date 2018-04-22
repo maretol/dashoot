@@ -25,11 +25,11 @@ jobs:
       # 以下WSDファイルの変換
       # まずGitの設定
       - run: git config --global user.name $USERNAME
-      - run: git config --global user.email $MAIL
+      - run: git config --global user.email $EMAIL
       - run: git checkout -b auto-document
       # WSDファイルを変換する
       # plantuml.jar をwgetあたりで持ってくるようにするとかしたほうがいいかもしれない
-      - run: java -jar ./plantuml.jar *.wsd # ここでダメって出たから変更する
+      - run: java -jar plantuml.jar *.wsd # ここでダメって出たから変更する
       # Gitにコミットしてプッシュ。[ci skip]でCIが無視してくれる
       - run: git add ~/*
       - run: git commit -am "[ci skip]auto commit"
