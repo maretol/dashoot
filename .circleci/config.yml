@@ -28,7 +28,9 @@ jobs:
       - run: git config --global user.email $EMAIL
       - run: git checkout -b auto-document
       # WSDファイルを変換する
-      # plantuml.jar をwgetあたりで持ってくるようにするとかしたほうがいいかもしれない
+      - run: curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
+      - run: sudo apt-get install git-lfs=2.4.0
+      - run: ssh git@github.com git-lfs-authenticate maretol/dashoot.git download
       - run: java -jar plantuml.jar *.wsd # ここでダメって出たから変更する
       # Gitにコミットしてプッシュ。[ci skip]でCIが無視してくれる
       - run: git add ~/*
