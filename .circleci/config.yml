@@ -38,6 +38,7 @@ jobs:
       - run: git add -A
       - run: ls doc/
       - run: git commit -am "[ci skip] auto commit" # で、ここでこけた
+      - run: git pull origin auto-document
       - run: git push origin auto-document
 
 workflows:
