@@ -32,8 +32,9 @@ jobs:
       - run: sudo apt-get install git-lfs
       - run: ssh git@github.com git-lfs-authenticate maretol/dashoot.git download
       - run: sudo apt-get install plantuml
-      - run: sudo apt-get install otf-ipaexfont-gothic
-      - run: plantuml -printfonts ipagothic doc/*.wsd
+      - run: sudo apt-get install otf-ipaexfont
+      - run: plantuml -printfonts ipafont doc/*.wsd
+      - run: fc-list|less
       # Gitにコミットしてプッシュ。[ci skip]でCIが無視してくれる
       - run: git add -A
       - run: git status
