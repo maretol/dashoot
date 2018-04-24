@@ -1,4 +1,5 @@
 @startuml "server-client map"
+!include umlsetting
 Client -> APIServer : 見たいテーマのAPI要求
 APIServer -> ThemeServer : テーマの有無を確認。
 DataBase DB

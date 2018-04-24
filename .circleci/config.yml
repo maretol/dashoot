@@ -18,26 +18,29 @@ jobs:
 
   document:
     docker:
-      - image: circleci/node:9.11.1
+      - image: circleci/openjdk:9.0.4
     working_directory: ~/doc
     steps:
       - checkout
       # 以下WSDファイルの変換
+      # まずGitの設定
       - run: git config --global user.name $USERNAME
       - run: git config --global user.email $EMAIL
-      - run: sudo apt install graphviz
-      - run: npm install
-      - run: npm run build
-      - run: npm run publish
+      - run: git checkout -b auto-document
+      # WSDファイルを変換する
+      - run: curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
+      - run: sudo apt-get install git-lfs
+      - run: ssh git@github.com git-lfs-authenticate maretol/dashoot.git download
+      - run: sudo apt-get install plantuml
+      - run: sudo apt-get install fonts-ipafont-gothic
+      - run: plantuml doc/*.wsd
+      # Gitにコミットしてプッシュ。[ci skip]でCIが無視してくれる
+      - run: git add -A
+      - run: git commit -am "[ci skip] auto commit"
+      - run: git push -f origin auto-document
 
 workflows:
   version: 2
   create_document:
-    triggers:
-      schedule:
-        filters:
-          branches:
-            only:
-              - document
     jobs:
       - document
