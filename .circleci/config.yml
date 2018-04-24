@@ -37,7 +37,10 @@ jobs:
       # Gitにコミットしてプッシュ。[ci skip]でCIが無視してくれる
       - run: git add -A
       - run: git commit -am "[ci skip] auto commit"
-      - run: git push -f origin auto-document
+      - run:
+        name: Git push
+        command: git push -f origin auto-document
+        when: on_success
 
 workflows:
   version: 2
