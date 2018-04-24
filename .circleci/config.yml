@@ -36,7 +36,6 @@ jobs:
       - run: plantuml doc/*.wsd
       # Gitにコミットしてプッシュ。[ci skip]でCIが無視してくれる
       - run: git add -A
-      - run: ls doc/
       - run: git commit -am "[ci skip] auto commit"
       - run: git push -f origin auto-document
 
