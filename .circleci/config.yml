@@ -32,10 +32,10 @@ jobs:
       - run: sudo apt-get install git-lfs
       - run: ssh git@github.com git-lfs-authenticate maretol/dashoot.git download
       - run: sudo apt-get install plantuml
-      - run: plantuml *.wsd # ここでダメって出たから変更する
+      - run: plantuml *.wsd # ここでダメって出たから変更する -> 通った。ただしwsdファイルの扱いとかダメっぽい？
       # Gitにコミットしてプッシュ。[ci skip]でCIが無視してくれる
-      - run: git add ~/*
-      - run: git commit -am "[ci skip]auto commit"
+      - run: git add -A
+      - run: git commit -am "[ci skip] auto commit" # で、ここでこけた
       - run: git remote add origin ssh://github.com/maretol/dashoot.git
       - run: git push origin auto-document
 
