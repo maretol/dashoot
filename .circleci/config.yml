@@ -3,6 +3,12 @@
 # Check https://circleci.com/docs/2.0/language-go/ for more details
 version: 2
 jobs:
+  hello_world:
+    docker:
+      - image: circleci/buildpack-deps:18.04-curl
+    steps:
+      - checkout
+      - run: echo "Hello World"
   build:
     branches:
       - only:
@@ -17,8 +23,6 @@ jobs:
       # specify any bash command here prefixed with `run: `
       - run: go get -v -t -d ./...
       - run: go test -v ./...
-
-
   document:
     branches:
       only:
@@ -52,5 +56,6 @@ workflows:
   version: 2
   create_document:
     jobs:
+      - hello_world
       - document
       - build
