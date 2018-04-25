@@ -17,6 +17,8 @@ jobs:
 
 
   document:
+    branches:
+      - document$
     docker:
       - image: circleci/openjdk:9.0.4
     working_directory: ~/doc
@@ -43,9 +45,5 @@ workflows:
   version: 2
   create_document:
     jobs:
-      - document:
-        filters:
-          branches:
-            only:
-              - document$
+      - document
       - build
