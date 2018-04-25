@@ -49,8 +49,4 @@ workflows:
             only:
               - document
               - auto-document
-
-  version: 2
-  test:
-    jobs:
       - build
