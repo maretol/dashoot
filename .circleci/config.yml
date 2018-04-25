@@ -44,3 +44,13 @@ workflows:
   create_document:
     jobs:
       - document
+        filters:
+          branches:
+            only:
+              - document
+              - auto-document
+
+  version: 2
+  test:
+    jobs:
+      - build
