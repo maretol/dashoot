@@ -18,7 +18,8 @@ jobs:
 
   document:
     branches:
-      - document$
+      only:
+        - document$
     docker:
       - image: circleci/openjdk:9.0.4
     working_directory: ~/doc
