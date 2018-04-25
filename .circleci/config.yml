@@ -47,6 +47,5 @@ workflows:
         filters:
           branches:
             only:
-              - document
-              - auto-document
+              - document$
       - build
