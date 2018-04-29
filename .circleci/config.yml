@@ -46,9 +46,15 @@ workflows:
   version: 2
   create_document:
     jobs:
-      - hello_world
+      - hello_world:
+          filters:
+            branches:
+              only: /*/
       - document:
-        filters:
-          branches:
-            only: /document$/
-      - build
+          filters:
+            branches:
+              only: document
+      - build:
+          filters:
+            branches:
+              only: /*/
