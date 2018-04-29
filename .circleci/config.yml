@@ -10,26 +10,16 @@ jobs:
       - checkout
       - run: echo "Hello World"
   build:
-    branches:
-      - only:
-        - master
     docker:
       # specify the version
       - image: circleci/golang:1.9
     working_directory: /go/src/github.com/maretol/dashoot
     steps:
       - checkout
-
       # specify any bash command here prefixed with `run: `
       - run: go get -v -t -d ./...
       - run: go test -v ./...
   document:
-    branches:
-      only:
-        - document
-        - document$
-      ignore:
-        - master
     docker:
       - image: circleci/openjdk:9.0.4
     working_directory: ~/doc
@@ -57,5 +47,8 @@ workflows:
   create_document:
     jobs:
       - hello_world
-      - document
+      - document:
+        filters:
+          branches:
+            only: /document$/
       - build
