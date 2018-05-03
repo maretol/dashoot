@@ -1,17 +1,16 @@
 package main
 
 import (
-	"math/rand"
 	"net/http"
 	"strconv"
 
 	"github.com/labstack/echo"
+	"github.com/yosssi/ace"
 )
-
-var hoge = rand.Int()
 
 func main() {
 	e := echo.New()
+	e.GET("/test", aceTest)
 	e.GET("/", helloWorld)
 	e.GET("/readthread", readThread)
 	e.POST("/postshoot", postMessage)
@@ -19,7 +18,7 @@ func main() {
 }
 
 func helloWorld(c echo.Context) error {
-	return c.String(http.StatusOK, "HELLO WORLD"+strconv.Itoa(hoge))
+	return c.String(http.StatusOK, "HELLO WORLD"+strconv.Itoa(100))
 }
 
 func postMessage(c echo.Context) error {
@@ -28,4 +27,15 @@ func postMessage(c echo.Context) error {
 
 func readThread(c echo.Context) error {
 	return c.String(http.StatusBadRequest, "bad")
+}
+
+func aceTest(c echo.Context) error {
+	tpl, err := ace.Load("template/base", "inner", nil)
+	if err != nil {
+		return c.String(http.StatusInternalServerError, err.Error())
+	}
+	if err := tpl.Execute(c.Response(), map[string]string{"Msg": "Hello Ace"}); err != nil {
+		return c.String(http.StatusInternalServerError, err.Error())
+	}
+	return c.String(http.StatusOK, "test")
 }
