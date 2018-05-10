@@ -11,7 +11,7 @@ Client -> ThemeServer : テーマサーバに接続
 ThemeServer -> Client : とりあえず直近の50件ぐらいを返す
 loop 適宜行う
     group リアルタイム通信部分
-    else WebSocketによる通信の場合
+    else WebSocket（ソケット足りない気がする）による通信の場合
         Client <-> ThemeServer : WebSocketによるタイムラインのPushおよび書き込みのPull
     else HTTP/2の場合
         Client <- ThemeServer : HTTP/2によるタイムラインのPush
